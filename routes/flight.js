@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 /* GET flightFare page. */
-// http://localhost:8000/fare/flight?src=srcCity&dest=destCity&date=DD/MM/YYYY
+// http://localhost:8000/fare/flight?src=srcCity&dest=destCity&date=dd/mm/yyyy
 
 async function flightFare(req) {
   const data = `{"CalKey_":"${req.query.src}_${req.query.dest}_${req.query.date}"}`;
@@ -71,12 +71,12 @@ router.get("/fare/flight", async function (req, res, next) {
   const maxPrice = 0;
   flights.data.map((flight) => {
     if (flight.IsCheapest === true) {
-      lowestFare.fare = flight.TtlFre;
+      lowestFare.price = flight.TtlFre;
       lowestFare.dept = flight.DepDate;
       lowestFare.name = flight.AirCode;
     }
     if (flight.TtlFre > maxPrice) {
-      highestFare.fare = flight.TtlFre;
+      highestFare.price = flight.TtlFre;
       highestFare.dept = flight.DepDate;
       highestFare.name = flight.AirCode;
     }

@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 /* GET busFare page. */
-// /fare/bus?src=srcCity&dest=destCity
+// /fare/bus?src=srcCity&dest=destCity&date=dd-M-yyyy
 
 async function busFare(req) {
   const config = {
@@ -89,15 +89,11 @@ router.get("/fare/bus", async function (req, res, next) {
       }
     }
   });
-  // console.log(totalFare / sampleSize);
-  // const avgFare = totalFare / fareArray.length;
-  // res.send(buses);
   res.json({
-    lowestPrice: lowestFare,
-    highestPrice: highestFare,
+    cheap: lowestFare,
+    expensive: highestFare,
     link: `https://www.redbus.in/search/SearchResults?fromCity=733&toCity=1429&src=${req.query.src}&dst=${req.query.dest}&DOJ=${req.query.date}&sectionId=0&groupId=0&limit=0&offset=0&sort=0&sortOrder=0&meta=true&returnSearch=0`,
   });
-  // res.send(buses.data.inv);
 });
 
 module.exports = router;
