@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 
-let port = process.env.PORT;
+let port = process.env.PORT || 8000;
 if (process.env.PORT == "null" || process.env.PORT == "") {
   port = 8000;
 }

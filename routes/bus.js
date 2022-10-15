@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 async function busFare(req) {
   const config = {
     method: "post",
-    url: `https://www.redbus.in/search/SearchResults?fromCity=733&toCity=1429&src=${req.query.src}&dst=${req.query.dest}&${req.query.src}&sectionId=0&groupId=0&limit=0&offset=0&sort=0&sortOrder=0&meta=true&returnSearch=0`,
+    url: `https://www.redbus.in/search/SearchResults?fromCity=733&toCity=1429&src=${req.query.src}&dst=${req.query.dest}&DOJ=${req.query.date}&sectionId=0&groupId=0&limit=0&offset=0&sort=0&sortOrder=0&meta=true&returnSearch=0`,
     headers: {
       authority: "www.redbus.in",
       method: "POST",
