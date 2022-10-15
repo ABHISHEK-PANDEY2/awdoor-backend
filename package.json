@@ -14,5 +14,22 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1"
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ABHISHEK-PANDEY2/awdoor-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "14.20.1"
+  },
+  "bugs": {
+    "url": "https://github.com/ABHISHEK-PANDEY2/awdoor-backend/issues"
+  },
+  "homepage": "https://github.com/ABHISHEK-PANDEY2/awdoor-backend#readme",
+  "description": ""
 }
