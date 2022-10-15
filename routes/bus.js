@@ -64,24 +64,40 @@ router.get("/fare/bus", async function (req, res, next) {
   const rawBusData = await busFare(req);
   const busData = JSON.stringify(rawBusData, getCircularReplacer());
   const buses = await JSON.parse(busData);
-  let sampleSize = 0;
-  console.log(buses);
-  const totalFare = buses.data.inv
-    .map((bus, i) => {
-      if (bus.frLst) {
-        sampleSize++;
-        return bus.frLst[0];
+  const highestFare = {};
+  const lowestFare = {};
+  let maxCost = 0;
+  let minCost = 1000000;
+  console.log(buses.data.inv);
+  const totalFare = buses.data.inv.map((bus, i) => {
+    if (bus.minfr) {
+      if (bus.minfr < minCost) {
+        minCost = bus.minfr;
+        lowestFare.price = bus.frLst[0];
+        lowestFare.company = bus.Tvs;
+        lowestFare.bus = bus.bt;
+        lowestFare.BoardingStation = bus.StdBp;
+        lowestFare.EndStation = bus.StdDp;
       }
-    })
-    .sort((a, b) => a - b);
-  console.log(totalFare);
+      if (bus.minfr > maxCost) {
+        maxCost = bus.minfr;
+        highestFare.price = bus.frLst[0];
+        highestFare.company = bus.Tvs;
+        highestFare.bus = bus.bt;
+        highestFare.BoardingStation = bus.StdBp;
+        highestFare.EndStation = bus.StdDp;
+      }
+    }
+  });
   // console.log(totalFare / sampleSize);
   // const avgFare = totalFare / fareArray.length;
   // res.send(buses);
   res.json({
-    lowestPrice: totalFare[0],
-    highestPrice: totalFare[totalFare.length - 1],
+    lowestPrice: lowestFare,
+    highestPrice: highestFare,
+    link: `https://www.redbus.in/search/SearchResults?fromCity=733&toCity=1429&src=${req.query.src}&dst=${req.query.dest}&DOJ=${req.query.date}&sectionId=0&groupId=0&limit=0&offset=0&sort=0&sortOrder=0&meta=true&returnSearch=0`,
   });
+  // res.send(buses.data.inv);
 });
 
 module.exports = router;
