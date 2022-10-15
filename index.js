@@ -1,3 +1,4 @@
+require("dotenv");
 const express = require("express");
 const bodyParser = require("body-parser");
 const hotelRouter = require("./routes/hotel");
@@ -15,6 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(busRouter);
 app.use(flightRouter);
 
-app.listen(8000, () => {
-  console.log("listening on port 8000");
+let port = process.env.PORT;
+if (process.env.PORT == "null" || process.env.PORT == "") {
+  port = 8000;
+}
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
 });
