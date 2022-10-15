@@ -16,6 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(busRouter);
 app.use(flightRouter);
 
+app.get("/", (req, res) => {
+  res.send("hello");
+});
+
 let port = process.env.PORT;
 if (process.env.PORT == "null" || process.env.PORT == "") {
   port = 8000;
