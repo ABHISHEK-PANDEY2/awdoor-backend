@@ -16,7 +16,7 @@ async function getTripDetails(src, dest, date, mode) {
   if (mode === "train") {
     const config = {
       method: "get",
-      url: `http://localhost:8000/fare/train?src=${src}&dest=${dest}&date=${date}`,
+      url: `https://young-bastion-57330.herokuapp.com/fare/train?src=${src}&dest=${dest}&date=${date}`,
       headers: {},
     };
 
@@ -27,7 +27,7 @@ async function getTripDetails(src, dest, date, mode) {
   if (mode === "bus") {
     const config = {
       method: "get",
-      url: `http://localhost:8000/fare/bus?src=${src}&dest=${dest}&date=${date}`,
+      url: `https://young-bastion-57330.herokuapp.com/fare/bus?src=${src}&dest=${dest}&date=${date}`,
       headers: {},
     };
 
@@ -38,7 +38,7 @@ async function getTripDetails(src, dest, date, mode) {
   if (mode === "flight") {
     const config = {
       method: "get",
-      url: `http://localhost:8000/fare/flight?src=${src}&dest=${dest}&date=${date}`,
+      url: `https://young-bastion-57330.herokuapp.com/fare/flight?src=${src}&dest=${dest}&date=${date}`,
       headers: {},
     };
 
