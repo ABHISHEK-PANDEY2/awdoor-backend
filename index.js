@@ -1,4 +1,5 @@
 require("dotenv");
+require("./mongoose/mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const hotelRouter = require("./routes/hotel");
@@ -19,6 +20,7 @@ app.use(unifiedRouter);
 app.use(busRouter);
 app.use(flightRouter);
 app.use(trainRouter);
+app.use(hotelRouter);
 
 app.get("/", (req, res) => {
   res.send("hello");

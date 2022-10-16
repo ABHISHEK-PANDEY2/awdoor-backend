@@ -135,7 +135,11 @@ router.get("/fare/train", async function (req, res, next) {
   res.json({
     cheap: lowestFare,
     expensive: highestFare,
-    link: `https://www.ixigo.com/trains/v1/search/between/${req.query.src}/${req.query.dest}?date=${req.query.date}&languageCode=en`,
+    link: `https://www.ixigo.com/trains/v1/search/between/${getStationCode(
+      req.query.src
+    )}/${getStationCode(req.query.dest)}?date=${
+      req.query.date
+    }&languageCode=en`,
   });
   //   res.send(trainLists);
 });

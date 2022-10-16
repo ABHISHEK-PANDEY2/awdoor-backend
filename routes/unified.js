@@ -87,7 +87,8 @@ router.get("/fare", async (req, res) => {
     req.query.src,
     req.query.dest,
     getDate(req.query.date, req.query.mode),
-    req.query.mode
+    req.query.mode,
+    req.query.stars
   );
   console.log(getDate(req.query.date, req.query.mode));
   const getCircularReplacer = () => {
@@ -102,10 +103,20 @@ router.get("/fare", async (req, res) => {
       return value;
     };
   };
+  const hotelApi = {
+    method: "get",
+    url: `https://young-bastion-57330.herokuapp.com/fare/hotel?dest=${req.query.dest}&stars=${req.query.stars}`,
+    headers: {},
+  };
   const trip = JSON.stringify(result, getCircularReplacer());
   const tripData = await JSON.parse(trip);
   console.log(getDestinationImage(req.query.dest));
   console.log(req.query.dest);
+
+  const hotelPrice = await axios(hotelApi);
+  const hotel = JSON.stringify(hotelPrice, getCircularReplacer());
+  const hotelData = await JSON.parse(hotel);
+  tripData.data.hotelData = hotelData.data;
   res.json({
     tripDetail: tripData.data,
     destinationImage: getDestinationImage(req.query.dest),
