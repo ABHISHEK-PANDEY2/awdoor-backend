@@ -11,8 +11,29 @@ app.use(bodyParser.json());
 /* GET flightFare page. */
 // http://localhost:8000/fare/flight?src=srcCity&dest=destCity&date=dd/mm/yyyy
 
+function getAirportCode(searchPlace) {
+  const place = searchPlace.toLowerCase();
+  if (place === "kasol") return "KUU";
+  if (place === "delhi") return "DEL";
+  if (place === "jammu") return "IXJ";
+  if (place === "himachal") return "SLV";
+  if (place === "shimla") return "SLV";
+  if (place === "bangalore") return "BLR";
+  if (place === "allahabad") return "IXD";
+  if (place === "varanasi") return "VNS";
+  if (place === "agra") return "AGR";
+  if (place === "rajasthan") return "VDR";
+  if (place === "jaipur") return "JAI";
+  if (place === "mumbai") return "BOM";
+  if (place === "manali") return "KUU";
+  if (place === "kolkata") return "CCV";
+  if (place === "chennai") return "MAA";
+}
+
 async function flightFare(req) {
-  const data = `{"CalKey_":"${req.query.src}_${req.query.dest}_${req.query.date}"}`;
+  const data = `{"CalKey_":"${getAirportCode(req.query.src)}_${getAirportCode(
+    req.query.dest
+  )}_${req.query.date}"}`;
 
   const config = {
     method: "post",
