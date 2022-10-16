@@ -11,14 +11,45 @@ app.use(bodyParser.json());
 /* GET busFare page. */
 // /fare/bus?src=srcCity&dest=destCity&date=dd-M-yyyy
 
+function getCityCode(searchPlace) {
+  const place = searchPlace.toLowerCase();
+  if (place === "kasol") return "197688";
+  if (place === "delhi") return "733";
+  if (place === "jammu") return "734";
+  if (place === "himachal") return "1285";
+  if (place === "shimla") return "1285";
+  if (place === "bangalore") return "122";
+  if (place === "allahabad") return "84832";
+  if (place === "varanasi") return "70429";
+  if (place === "agra") return "1290";
+  if (place === "rajasthan") return "807";
+  if (place === "jaipur") return "807";
+  if (place === "mumbai") return "462";
+  if (place === "manali") return "757";
+  if (place === "kolkata") return "74820";
+}
+
 async function busFare(req) {
   const config = {
     method: "post",
-    url: `https://www.redbus.in/search/SearchResults?fromCity=733&toCity=1429&src=${req.query.src}&dst=${req.query.dest}&DOJ=${req.query.date}&sectionId=0&groupId=0&limit=0&offset=0&sort=0&sortOrder=0&meta=true&returnSearch=0`,
+    url: `https://www.redbus.in/search/SearchResults?fromCity=${getCityCode(
+      req.query.src
+    )}&toCity=${getCityCode(req.query.dest)}&src=${req.query.src}&dst=${
+      req.query.dest
+    }&DOJ=${
+      req.query.date
+    }&sectionId=0&groupId=0&limit=0&offset=0&sort=0&sortOrder=0&meta=true&returnSearch=0`,
     headers: {
       authority: "www.redbus.in",
       method: "POST",
-      path: "/search/SearchResults?fromCity=733&toCity=1429&src=Delhi&dst=Noida&DOJ=15-Oct-2022&sectionId=0&groupId=0&limit=0&offset=0&sort=0&sortOrder=0&meta=true&returnSearch=0, scheme: https",
+      path: `/search/SearchResults?fromCity=${getCityCode(
+        req.query.src
+      )}&toCity=${getCityCode(req.query.dest)}&src=${req.query.src}&dst=${
+        req.query.dest
+      }&DOJ=${
+        req.query.date
+      }&sectionId=0&groupId=0&limit=0&offset=0&sort=0&sortOrder=0&meta=true&returnSearch=0`,
+      scheme: "https",
       "accept-encoding": " gzip, deflate, br",
       "accept-language": " en-US,en;q=0.9",
       "content-length": " 0",
@@ -92,7 +123,13 @@ router.get("/fare/bus", async function (req, res, next) {
   res.json({
     cheap: lowestFare,
     expensive: highestFare,
-    link: `https://www.redbus.in/search/SearchResults?fromCity=733&toCity=1429&src=${req.query.src}&dst=${req.query.dest}&DOJ=${req.query.date}&sectionId=0&groupId=0&limit=0&offset=0&sort=0&sortOrder=0&meta=true&returnSearch=0`,
+    link: `https://www.redbus.in/search/SearchResults?fromCity=${getCityCode(
+      req.query.src
+    )}&toCity=${getCityCode(req.query.dest)}&src=${req.query.src}&dst=${
+      req.query.dest
+    }&DOJ=${
+      req.query.date
+    }&sectionId=0&groupId=0&limit=0&offset=0&sort=0&sortOrder=0&meta=true&returnSearch=0`,
   });
 });
 

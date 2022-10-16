@@ -8,17 +8,43 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+function getStationCode(searchPlace) {
+  const place = searchPlace.toLowerCase();
+  if (place === "kasol") return "NLDM";
+  if (place === "delhi") return "NDLS";
+  if (place === "jammu") return "JAT";
+  if (place === "himachal") return "VHL";
+  if (place === "shimla") return "VHL";
+  if (place === "bangalore") return "SBC";
+  if (place === "allahabad") return "ALD";
+  if (place === "varanasi") return "BSBS";
+  if (place === "agra") return "AGC";
+  if (place === "rajasthan") return "JP";
+  if (place === "jaipur") return "JP";
+  if (place === "mumbai") return "MMCT";
+  if (place === "manali") return "MNLI";
+  if (place === "kolkata") return "KOAA";
+}
+
 /* GET trainFare page. */
 // http://localhost:8000/fare/train?src=srcCity&dest=destCity&date=yyyy-mm-dd
 
 async function trainFare(req) {
   const config = {
     method: "get",
-    url: `https://www.ixigo.com/trains/v1/search/between/${req.query.src}/${req.query.dest}?date=${req.query.date}&languageCode=en`,
+    url: `https://www.ixigo.com/trains/v1/search/between/${getStationCode(
+      req.query.src
+    )}/${getStationCode(req.query.dest)}?date=${
+      req.query.date
+    }&languageCode=en`,
     headers: {
       authority: "www.ixigo.com",
       method: "GET",
-      path: `/trains/v1/search/between/${req.query.src}/${req.query.dest}?date=${req.query.date}&languageCode=en`,
+      path: `/trains/v1/search/between/${getStationCode(
+        req.query.src
+      )}/${getStationCode(req.query.dest)}?date=${
+        req.query.date
+      }&languageCode=en`,
       scheme: "https",
       accept: " */*",
       "accept-encoding": " gzip, deflate, br",
