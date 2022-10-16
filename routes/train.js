@@ -24,6 +24,7 @@ function getStationCode(searchPlace) {
   if (place === "mumbai") return "MMCT";
   if (place === "manali") return "MNLI";
   if (place === "kolkata") return "KOAA";
+  if (place === "chennai") return "MAS";
 }
 
 /* GET trainFare page. */

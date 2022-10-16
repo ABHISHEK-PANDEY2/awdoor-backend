@@ -27,6 +27,7 @@ function getCityCode(searchPlace) {
   if (place === "mumbai") return "462";
   if (place === "manali") return "757";
   if (place === "kolkata") return "74820";
+  if (place === "chennai") return "123";
 }
 
 async function busFare(req) {
