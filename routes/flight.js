@@ -26,7 +26,7 @@ function getAirportCode(searchPlace) {
   if (place === "jaipur") return "JAI";
   if (place === "mumbai") return "BOM";
   if (place === "manali") return "KUU";
-  if (place === "kolkata") return "CCV";
+  if (place === "kolkata") return "CCU";
   if (place === "chennai") return "MAA";
 }
 
