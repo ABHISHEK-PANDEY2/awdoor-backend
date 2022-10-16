@@ -105,7 +105,11 @@ router.get("/fare/flight", async function (req, res, next) {
   res.json({
     cheap: lowestFare,
     expensive: highestFare,
-    link: `https://www.makemytrip.com/flight/search?tripType=O&itinerary=${req.query.src}-${req.query.dest}-${req.query.date}&paxType=A-1_C-0_I-0&intl=false&cabinClass=E&ccde=IN`,
+    link: `https://www.makemytrip.com/flight/search?tripType=O&itinerary=${getAirportCode(
+      req.query.src
+    )}-${getAirportCode(req.query.dest)}-${
+      req.query.date
+    }&paxType=A-1_C-0_I-0&intl=false&cabinClass=E&ccde=IN`,
   });
 });
 
